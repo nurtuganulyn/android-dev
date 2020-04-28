@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Moviedom</string>
+    <string name="todo">TODO</string>
+    <string name="preference_file">shared_preferences</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="session_id">session_id</string>
+    <string name="error">Error</string>
+    <string name="wrong">Wrong data</string>
+    <string name="favourites">Favourite movies</string>
+    <string name="settings">User settings</string>
+    <string name="min"> min</string>
+    <string name="dollar"> $</string>
+    <string name="release_date">Release date:</string>
+    <string name="budget">Budget:</string>
+    <string name="revenue">Revenue:</string>
+    <string name="produced_by">Produced by:</string>
+    <string name="info">Info</string>
+    <string name="cast">Cast</string>
+    <string name="review">Review</string>
+    <string name="now_playing">NOW PLAYING</string>
+    <string name="popular">POPULAR</string>
+    <string name="upcoming">UPCOMING</string>
+    <string name="sign_in">Sign in</string>
+    <string name="wrong_data">Wrong data</string>
+    <string name="auth_hint">Enter your username and password</string>
+</resources>
