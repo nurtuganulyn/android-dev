@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var sharedPreferences: SharedPreferences
@@ -38,8 +37,6 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationListener)
         fragmentManager.beginTransaction().add(R.id.main_container, FragmentFeed(), "1").commit()
     }
-
-  
 
     private val navigationListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item ->

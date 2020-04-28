@@ -12,11 +12,12 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.kino.MovieStatusDao
+import com.example.movieproject.Database.MovieDao
+import com.example.movieproject.Database.MovieDatabase
 import com.example.movieproject.MovieClasses.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.android.synthetic.main.moviedb_feed.*
+import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,6 +30,9 @@ class FragmentFeed: Fragment(), MovieAdapter.RvItemClickListener, CoroutineScope
     private val job = Job()
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
+
+    private var movieDao: MovieDao? = null
+    private var movieStatusDao: MovieStatusDao? = null
 
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private  lateinit var recyclerView: RecyclerView
@@ -48,6 +52,9 @@ class FragmentFeed: Fragment(), MovieAdapter.RvItemClickListener, CoroutineScope
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        movieDao = MovieDatabase.getDatabase(context = requireActivity()).movieDao()
+        movieStatusDao = MovieDatabase.getDatabase(context = requireActivity()).movieStatusDao()
+
         sharedPreferences = requireActivity().getSharedPreferences(
            getString(R.string.preference_file), Context.MODE_PRIVATE
         )
@@ -63,8 +70,8 @@ class FragmentFeed: Fragment(), MovieAdapter.RvItemClickListener, CoroutineScope
             adapter?.clearAll()
             getMovies()
         }
-
         getMovies()
+
     }
     private fun initAdapter() {
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -86,30 +93,68 @@ class FragmentFeed: Fragment(), MovieAdapter.RvItemClickListener, CoroutineScope
     private fun getMovies() {
         launch {
             swipeRefreshLayout.isRefreshing = true
-            try {
-                val response = ServiceBuilder.getPostApi().getPopularMoviesList(MovieDBApiKey)
-                movieList = mutableListOf()
-                if (response.isSuccessful) {
-                    val movies = response.body()
-                    if (movies != null) {
-                        for (movie: Movie in movies.movieList) {
-                            likeStatus(movie)
-                            movieList.add(movie)
+            val movies = withContext(Dispatchers.IO) {
+                try {
+                    refreshFavourites()
+                    val response = ServiceBuilder.getPostApi().getPopularMoviesList(MovieDBApiKey)
+                    if (response.isSuccessful) {
+                        val movies = response.body()?.movieList
+                        if (movies != null) {
+                            for (movie: Movie in movies) {
+                                likeStatus(movie)
+                            }
                         }
+                        if (!movies.isNullOrEmpty()) {
+                            movieDao?.deleteAll()
+                            movieDao?.insertAll(movies)
+                        }
+                        return@withContext movies
+                    } else {
+                        return@withContext movieDao?.getMovies() ?: emptyList()
                     }
-                    adapter?.movies = movieList
-                    adapter?.notifyDataSetChanged()
-
+                } catch (e:Exception) {
+                    return@withContext movieDao?.getMovies() ?: emptyList()
                 }
-                swipeRefreshLayout.isRefreshing = false
             }
-            catch (e: Exception) {
-                swipeRefreshLayout.isRefreshing = false
+            swipeRefreshLayout.isRefreshing = false
+            if (movies != null) {
+                adapter?.changeMovies(movies)
             }
         }
     }
 
+    private fun refreshFavourites() {
+        val movies = movieStatusDao?.getMovieStatuses()
+        if (!movies.isNullOrEmpty()) {
+            for (movie in movies) {
+                val likedMovie = LikedMovie(movieId = movie.movieId,
+                    selectedStatus = movie.selectedStatus)
+                addRemoveFavourites(likedMovie)
+            }
+        }
+        movieStatusDao?.deleteAll()
+    }
 
+
+    private fun addRemoveFavourites(likedMovie: LikedMovie) {
+        launch {
+            try {
+                val response = ServiceBuilder.getPostApi().addRemoveFavourites(MovieDBApiKey, sessionId, likedMovie)
+                if (response.isSuccessful) {
+
+                }
+            } catch (e:Exception) {
+                withContext(Dispatchers.IO) {
+                    movieDao?.updateMovieIsCLicked(
+                        likedMovie.selectedStatus,
+                        likedMovie.movieId
+                    )
+                    val moviesStatus = MovieStatus(likedMovie.movieId, likedMovie.selectedStatus)
+                    movieStatusDao?.insertMovieStatus(moviesStatus)
+                }
+            }
+        }
+    }
 
     override fun addToFavourites(position: Int, item: Movie) {
         lateinit var likedMovie: LikedMovie
@@ -122,20 +167,11 @@ class FragmentFeed: Fragment(), MovieAdapter.RvItemClickListener, CoroutineScope
             likedMovie = LikedMovie("movie", item.id, item.isClicked)
             likedMovie.selectedStatus = item.isClicked
         }
-        launch {
-            try {
-                val response = ServiceBuilder.getPostApi().addRemoveFavourites(MovieDBApiKey, sessionId, likedMovie)
-                if (response.isSuccessful) {
-
-                }
-            } catch (e:Exception) {
-
-            }
-        }
+        addRemoveFavourites(likedMovie)
     }
 
 
-     fun likeStatus(movie: Movie){
+     private fun likeStatus(movie: Movie){
         launch {
             try {
                 val response = ServiceBuilder.getPostApi().getMovieStates(movie.id, MovieDBApiKey, sessionId)
@@ -143,11 +179,39 @@ class FragmentFeed: Fragment(), MovieAdapter.RvItemClickListener, CoroutineScope
                     val movieStatus = response.body()
                     if (movieStatus != null) {
                         movie.isClicked = movieStatus.selectedStatus
+                        withContext(Dispatchers.IO) {
+                            movieDao?.updateMovieIsCLicked(movie.isClicked, movie.id)
+                        }
                         adapter?.notifyDataSetChanged()
                     }
                 }
             } catch (e:Exception) {
 
+            }
+        }
+    }
+
+    private fun setGenreNames(movie: Movie) {
+        movie.genreNames = ""
+        var i: Int = 0;
+        if (movie.genres.isNullOrEmpty())
+        else {
+            for (genre in movie.genres!!) {
+                movie.genreNames+= "${genre.name}, "
+                i+=1;
+                if (i == movie.genres!!.size - 1) movie.genreNames+= "${genre.name}"
+            }
+        }
+    }
+    private fun setProdNames(movie: Movie) {
+        movie.producersName = ""
+        var i: Int = 0;
+        if (movie.producers.isNullOrEmpty())
+        else {
+            for (prod in movie.producers!!) {
+                movie.producersName+= "${prod.name}, "
+                i+=1;
+                if (i == movie.producers!!.size - 1) movie.producersName+= "${prod.name}"
             }
         }
     }

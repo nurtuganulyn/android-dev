@@ -36,6 +36,11 @@ class MovieAdapter(
         notifyDataSetChanged()
     }
 
+    fun changeMovies(moviesList: List<Movie>) {
+        movies = moviesList
+        notifyDataSetChanged()
+    }
+
     inner class MovieViewHolder(private val view : View): RecyclerView.ViewHolder(view) {
 
         fun bind(movie: Movie?) {

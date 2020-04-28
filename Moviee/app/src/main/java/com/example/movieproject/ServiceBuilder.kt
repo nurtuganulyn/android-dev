@@ -56,7 +56,7 @@ interface PostApi {
     suspend fun getMovie(
         @Path("movie_id") movieId: Int,
         @Query("api_key") apiKey: String
-    ): Response<SingleMovie>
+    ): Response<Movie>
 
     @GET("account/{account_id}/favorite/movies")
     suspend fun getFavouriteMovies(

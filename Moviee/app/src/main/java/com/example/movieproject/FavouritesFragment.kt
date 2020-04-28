@@ -12,14 +12,11 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.movieproject.MovieClasses.LikedMovie
-import com.example.movieproject.MovieClasses.Movie
-import com.example.movieproject.MovieClasses.MoviesResponse
-import com.example.movieproject.MovieClasses.StatusResponse
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import com.example.kino.MovieStatusDao
+import com.example.movieproject.Database.MovieDao
+import com.example.movieproject.Database.MovieDatabase
+import com.example.movieproject.MovieClasses.*
+import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,6 +30,8 @@ class FavouritesFragment: Fragment(), MovieAdapter.RvItemClickListener, Coroutin
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
 
+    private var movieDao: MovieDao? = null
+    private var movieStatusDao: MovieStatusDao? = null
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
@@ -48,6 +47,9 @@ class FavouritesFragment: Fragment(), MovieAdapter.RvItemClickListener, Coroutin
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        movieDao = MovieDatabase.getDatabase(context = requireActivity()).movieDao()
+        movieStatusDao = MovieDatabase.getDatabase(context = requireContext()).movieStatusDao()
 
         sharedPreferences = requireActivity().getSharedPreferences(
             getString(R.string.preference_file), Context.MODE_PRIVATE
@@ -89,30 +91,67 @@ class FavouritesFragment: Fragment(), MovieAdapter.RvItemClickListener, Coroutin
         startActivity(intent)
     }
 
-
     private fun getMovies() {
         launch {
-            try {
-                val response = ServiceBuilder.getPostApi().getFavouriteMovies(MovieDBApiKey, sessionId)
-                if (response.isSuccessful) {
-                    val movies: MoviesResponse? = response.body()
-                    if (movies?.movieList?.size == 0) {
-                        swipeRefreshLayout.isRefreshing = false
-                    } else {
-                        adapter?.movies = movies?.movieList
-                        if (adapter?.movies != null) {
-                            for (movie in adapter?.movies as MutableList<Movie>) {
+            swipeRefreshLayout.isRefreshing = true
+            withContext(Dispatchers.IO) {
+                refreshFavourites()
+            }
+            val favMovies = withContext(Dispatchers.IO) {
+                try {
+                    delay(500)
+                    val response = ServiceBuilder.getPostApi().
+                        getFavouriteMovies(MovieDBApiKey, sessionId)
+                    if (response.isSuccessful) {
+                        val movies = response.body()?.movieList
+                        if (!movies.isNullOrEmpty()) {
+                            for (movie in movies) {
                                 movie.isClicked = true
                             }
                         }
-                        adapter?.notifyDataSetChanged()
-                        swipeRefreshLayout.isRefreshing = false
+                        return@withContext movies
+                    } else {
+                        return@withContext movieDao?.getFavouriteMovies() ?: emptyList()
                     }
-                } else {
-                    swipeRefreshLayout.isRefreshing = false
+                } catch (e:Exception) {
+                    return@withContext movieDao?.getFavouriteMovies() ?: emptyList()
+                }
+            }
+            swipeRefreshLayout.isRefreshing = false
+            if (favMovies != null) {
+                adapter?.changeMovies(favMovies)
+            }
+        }
+    }
+
+    private fun refreshFavourites() {
+        val movies = movieStatusDao?.getMovieStatuses()
+        if (!movies.isNullOrEmpty()) {
+            for (movie in movies) {
+                val likedMovie = LikedMovie(movieId = movie.movieId,
+                    selectedStatus = movie.selectedStatus)
+                addRemoveFavourites(likedMovie)
+            }
+        }
+        movieStatusDao?.deleteAll()
+    }
+
+
+    private fun addRemoveFavourites(likedMovie: LikedMovie) {
+        launch {
+            try {
+                val response = ServiceBuilder.getPostApi().addRemoveFavourites(MovieDBApiKey, sessionId, likedMovie)
+                if (response.isSuccessful) {
                 }
             } catch (e:Exception) {
-
+                withContext(Dispatchers.IO) {
+                    movieDao?.updateMovieIsCLicked(
+                        likedMovie.selectedStatus,
+                        likedMovie.movieId
+                    )
+                    val moviesStatus = MovieStatus(likedMovie.movieId, likedMovie.selectedStatus)
+                    movieStatusDao?.insertMovieStatus(moviesStatus)
+                }
             }
         }
     }
@@ -128,18 +167,14 @@ class FavouritesFragment: Fragment(), MovieAdapter.RvItemClickListener, Coroutin
             likedMovie = LikedMovie("movie", item.id, item.isClicked)
             likedMovie.selectedStatus = item.isClicked
         }
-        launch {
-            try {
-                val response = ServiceBuilder.getPostApi().addRemoveFavourites(MovieDBApiKey, sessionId, likedMovie)
-                if (response.isSuccessful) {
-                    swipeRefreshLayout.isRefreshing = true
-                    adapter?.clearAll()
-                    getMovies()
-                }
-            } catch (e:Exception) {
-
-            }
-        }
+        addRemoveFavourites(likedMovie)
+        swipeRefreshLayout.isRefreshing = true
+        adapter?.clearAll()
+        getMovies()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        job.cancel()
+    }
 }

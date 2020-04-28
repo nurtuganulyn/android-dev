@@ -56,10 +56,6 @@ class LoginActivity: AppCompatActivity(), CoroutineScope {
         bindViews()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        job.cancel()
-    }
 
     private fun bindViews() {
         username = findViewById(R.id.etUsername)
@@ -70,6 +66,7 @@ class LoginActivity: AppCompatActivity(), CoroutineScope {
 
         progressBar = findViewById(R.id.progressBar)
         progressBar.visibility = View.GONE
+        wrongDataText.text = ""
 
         registrationLink.setOnClickListener {
             val browserIntent =

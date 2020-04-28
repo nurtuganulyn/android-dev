@@ -1,4 +1,4 @@
-package com.example.moviee
+package com.example.movieproject
 
 import org.junit.Test
 
