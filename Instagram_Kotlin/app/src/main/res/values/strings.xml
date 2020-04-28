@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">KotlinRecyclerViewExample</string>
+    <string name="comments">Посмотреть все комментарии (909)</string>
+</resources>
