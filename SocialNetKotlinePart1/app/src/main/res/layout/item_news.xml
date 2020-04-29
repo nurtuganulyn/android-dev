@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/vkwhite">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="12dp"
+        android:background="@drawable/shape"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
+        app:srcCompat="@drawable/image"
+        tools:srcCompat="@drawable/image" />
+
+    <TextView
+        android:id="@+id/autor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="TextView"
+        android:textColor="@color/vkblue"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="sans-serif"
+        android:text="TextView"
+        android:textColor="@color/darkestgray"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/autor" />
+
+
+    <TextView
+        android:id="@+id/vText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:fontFamily="serif-monospace"
+
+        android:maxLines="7"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/date"
+        app:layout_constraintVertical_bias="0.192"
+        tools:text="самое холодное место на земле, наверное, наши сердца. где сто лет одиночества — за один день, под утомленный, безнадежно влюбленный рассвет. где всякие глаза, лишенные света, окрасились в траур, глядят на серый мир с тоской. мудрецо" />
+
+    <TextView
+        android:id="@+id/showmore"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Показать полностью..."
+        android:textColor="@color/vkblue"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/vText"
+        app:layout_constraintTop_toBottomOf="@+id/vText" />
+
+    <TextView
+        android:id="@+id/like_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="12dp"
+        android:fontFamily="sans-serif"
+        android:text="TextView"
+
+        android:textColor="#A6A9B0"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <ImageView
+        android:id="@+id/like_btn"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/like_text"
+        app:layout_constraintEnd_toStartOf="@+id/like_text"
+        app:layout_constraintTop_toTopOf="@+id/like_text"
+        app:srcCompat="@drawable/heart"
+        tools:srcCompat="@drawable/heart" />
+
+    <TextView
+        android:id="@+id/comment_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="sans-serif"
+        android:text="TextView"
+        android:textColor="#8C8D8F"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/like_btn"
+        app:layout_constraintEnd_toStartOf="@+id/like_btn"
+        app:layout_constraintTop_toTopOf="@+id/like_btn" />
+
+    <ImageView
+        android:id="@+id/comment_btnnew"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/comment_text"
+        app:layout_constraintEnd_toStartOf="@+id/comment_text"
+        app:layout_constraintTop_toTopOf="@+id/comment_text"
+        app:srcCompat="@drawable/comment" />
+
+    <TextView
+        android:id="@+id/shre_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="sans-serif"
+        android:text="TextView"
+        android:textColor="#8C8D8F"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/comment_btnnew"
+        app:layout_constraintEnd_toStartOf="@+id/comment_btnnew"
+        app:layout_constraintTop_toTopOf="@+id/comment_btnnew" />
+
+    <ImageView
+        android:id="@+id/share_button"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginEnd="4dp"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/shre_text"
+        app:layout_constraintEnd_toStartOf="@+id/shre_text"
+        app:layout_constraintTop_toTopOf="@+id/shre_text"
+        app:srcCompat="@drawable/share" />
+
+    <ImageView
+        android:id="@+id/view_button"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="12dp"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/share_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/share_button"
+        app:srcCompat="@drawable/eye" />
+
+    <TextView
+        android:id="@+id/view_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="14dp"
+        android:fontFamily="sans-serif"
+        android:text="TextView"
+        android:textColor="#8C8D8F"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/view_button"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="0dp"
+        android:layout_height="400dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/showmore"
+        app:srcCompat="@drawable/picture6"
+        tools:srcCompat="@drawable/picture6" />
+
+    <View
+        android:id="@+id/whiteview1"
+        android:layout_width="427dp"
+        android:layout_height="0.6dp"
+        android:layout_marginTop="42dp"
+        android:background="#3C3C3C"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <View
+        android:id="@+id/blackview"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@color/vkgray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/whiteview1" />
+
+    <View
+        android:id="@+id/whiteview2"
+        android:layout_width="427dp"
+        android:layout_height="0.6dp"
+        android:layout_marginTop="48dp"
+        android:background="#3C3C3C"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

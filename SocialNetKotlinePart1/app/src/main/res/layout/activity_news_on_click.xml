@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/vkwhite"
+    android:layout_height="match_parent"
+    tools:context=".NewsOnClickActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/image"
+                tools:srcCompat="@drawable/image" />
+
+            <TextView
+                android:id="@+id/autor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:text="TextView"
+                android:textColor="@color/vkblue"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:fontFamily="sans-serif"
+                android:text="TextView"
+                android:textColor="@color/darkestgray"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/autor" />
+
+            <TextView
+                android:id="@+id/vText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="serif-monospace"
+
+                android:text="TextView"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                tools:text="Она несла в руках отвратительные, тревожные желтые цветы. Черт их знает, как их зовут, но они первые почему-то появляются в Москве. И эти цветы очень отчетливо выделялись на черном ее весеннем пальто. Она несла желтые цветы! Нехороший цвет." />
+
+            <TextView
+                android:id="@+id/like_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="12dp"
+                android:fontFamily="sans-serif"
+
+                android:text="TextView"
+                android:textColor="#8C8D8F"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/likedbypeople" />
+
+            <ImageView
+                android:id="@+id/like_btn"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/like_text"
+                app:layout_constraintEnd_toStartOf="@+id/like_text"
+                app:layout_constraintTop_toTopOf="@+id/like_text"
+                app:srcCompat="@drawable/heart"
+                tools:srcCompat="@drawable/heart" />
+
+            <TextView
+                android:id="@+id/comment_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="sans-serif"
+                android:text="TextView"
+                android:textColor="#8C8D8F"
+                app:layout_constraintBottom_toBottomOf="@+id/like_btn"
+                app:layout_constraintEnd_toStartOf="@+id/like_btn"
+                app:layout_constraintTop_toTopOf="@+id/like_btn" />
+
+            <ImageView
+                android:id="@+id/comment_btnnew"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/comment_text"
+                app:layout_constraintEnd_toStartOf="@+id/comment_text"
+                app:layout_constraintTop_toTopOf="@+id/comment_text"
+                app:srcCompat="@drawable/comment" />
+
+            <TextView
+                android:id="@+id/shre_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="sans-serif"
+                android:text="TextView"
+                android:textColor="#8C8D8F"
+                app:layout_constraintBottom_toBottomOf="@+id/comment_btnnew"
+                app:layout_constraintEnd_toStartOf="@+id/comment_btnnew"
+                app:layout_constraintTop_toTopOf="@+id/comment_btnnew" />
+
+            <ImageView
+                android:id="@+id/share_button"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginEnd="4dp"
+                android:background="@null"
+                app:layout_constraintBottom_toBottomOf="@+id/shre_text"
+                app:layout_constraintEnd_toStartOf="@+id/shre_text"
+                app:layout_constraintTop_toTopOf="@+id/shre_text"
+                app:srcCompat="@drawable/share" />
+
+            <ImageView
+                android:id="@+id/view_button"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="12dp"
+                android:background="@null"
+                app:layout_constraintBottom_toBottomOf="@+id/share_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/share_button"
+                app:srcCompat="@drawable/eye" />
+
+
+            <TextView
+                android:id="@+id/view_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:fontFamily="sans-serif"
+                android:text="TextView"
+                android:textColor="#A6A9B0"
+                app:layout_constraintStart_toEndOf="@+id/view_button"
+                app:layout_constraintTop_toTopOf="@+id/view_button" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="0dp"
+                android:layout_height="400dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vText"
+                app:srcCompat="@drawable/picture"
+                tools:srcCompat="@drawable/picture" />
+
+            <TextView
+                android:id="@+id/likedbypeople"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="12dp"
+                android:text="TextView"
+                android:textColor="#8C8D8F"
+                app:layout_constraintStart_toEndOf="@+id/imageView4"
+                app:layout_constraintTop_toBottomOf="@+id/imageView3"
+                tools:text="Понравилось 243 людям" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="24sp"
+                android:layout_height="24sp"
+                app:layout_constraintStart_toStartOf="@+id/view_button"
+                app:layout_constraintTop_toTopOf="@+id/likedbypeople"
+                app:srcCompat="@drawable/image"
+                tools:srcCompat="@drawable/image" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="24sp"
+                android:layout_height="24sp"
+                android:layout_marginStart="4dp"
+                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintTop_toTopOf="@+id/likedbypeople"
+                app:srcCompat="@drawable/image" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

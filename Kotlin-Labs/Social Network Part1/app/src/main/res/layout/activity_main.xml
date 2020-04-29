@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/vkwhite">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/NestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/blackview"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@color/vkgray"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/whiteview1" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="left"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/shape"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/image" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="4dp"
+                    android:text="What's new?"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@+id/imageView5"
+                    app:layout_constraintTop_toTopOf="@+id/imageView5" />
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="70dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.996"
+                    app:layout_constraintStart_toEndOf="@+id/textView"
+                    app:layout_constraintTop_toTopOf="@+id/imageView5"
+                    app:srcCompat="@drawable/theend" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/blackview2"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/vkgray"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/whiteview1" />
+
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/circleImageView"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:src="@drawable/ava3"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:text="The Idea Hub"
+                            android:textColor="@color/vkblue"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="@+id/circleImageView"
+                            app:layout_constraintStart_toStartOf="@+id/circleImageView"
+                            app:layout_constraintTop_toBottomOf="@+id/circleImageView"
+                            app:layout_goneMarginTop="3dp"
+                            tools:ignore="SmallSp" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp">
+
+                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/circleImageView6"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/circle_border"
+                            android:src="@drawable/ava3"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:text="The Idea Hub"
+                            android:textColor="@color/vkblue"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="@+id/circleImageView6"
+                            app:layout_constraintStart_toStartOf="@+id/circleImageView6"
+                            app:layout_constraintTop_toBottomOf="@+id/circleImageView6"
+                            app:layout_goneMarginTop="3dp" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp">
+
+                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/circleImageView7"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/circle_border"
+                            android:src="@drawable/ava3"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:text="The Idea Hub"
+                            android:textColor="@color/vkblue"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="@+id/circleImageView7"
+                            app:layout_constraintStart_toStartOf="@+id/circleImageView7"
+                            app:layout_constraintTop_toBottomOf="@+id/circleImageView7"
+                            app:layout_goneMarginTop="3dp" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp">
+
+                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/circleImageView8"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/circle_border"
+                            android:src="@drawable/ava3"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:text="The Idea Hub"
+                            android:textColor="@color/vkblue"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="@+id/circleImageView8"
+                            app:layout_constraintStart_toStartOf="@+id/circleImageView8"
+                            app:layout_constraintTop_toBottomOf="@+id/circleImageView8"
+                            app:layout_goneMarginTop="3dp" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp">
+
+                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/circleImageView9"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/circle_border"
+                            android:src="@drawable/ava3"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:text="The Idea Hub"
+                            android:textColor="@color/vkblue"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="@+id/circleImageView9"
+                            app:layout_constraintStart_toStartOf="@+id/circleImageView9"
+                            app:layout_constraintTop_toBottomOf="@+id/circleImageView9"
+                            app:layout_goneMarginTop="3dp" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp">
+
+                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/circleImageView10"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/circle_border"
+                            android:src="@drawable/ava3"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:text="The Idea Hub"
+                            android:textColor="@color/vkblue"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="@+id/circleImageView10"
+                            app:layout_constraintStart_toStartOf="@+id/circleImageView10"
+                            app:layout_constraintTop_toBottomOf="@+id/circleImageView10"
+                            app:layout_goneMarginTop="3dp" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <View
+                android:id="@+id/blackview3"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:background="@color/vkgray"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/whiteview1" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@color/vkgray"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
+                tools:listitem="@layout/item_news" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
