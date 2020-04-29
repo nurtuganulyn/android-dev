@@ -3,14 +3,14 @@
     <item
         android:id="@+id/feed"
         android:icon="@drawable/ic_feed"
-        android:title="Movies" />
+        android:title="Фильмы" />
     <item
         android:id="@+id/like"
         android:icon="@drawable/ic_liked"
-        android:title="Favourites" />
+        android:title="Избранные" />
     <item
         android:id="@+id/account"
         android:icon="@drawable/ic_profileaction_name"
-        android:title="Profile" />
+        android:title="Профиль" />
 
 </menu>
