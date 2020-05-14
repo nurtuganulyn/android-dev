@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "234567884874",
+    "firebase_url": "https://my-test-application-da46f.firebaseio.com",
+    "project_id": "my-test-application-da46f",
+    "storage_bucket": "my-test-application-da46f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:234567884874:android:65a960997cc2a6479a46b3",
+        "android_client_info": {
+          "package_name": "com.example.movieproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "234567884874-omhhf43rlhvjioeopfhcl1m2p0ga60c2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjnH7O0uVy1eMpvYWdLwqET60X2lG4SGQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "234567884874-omhhf43rlhvjioeopfhcl1m2p0ga60c2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
