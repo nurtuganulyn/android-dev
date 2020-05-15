@@ -24,4 +24,5 @@
     <string name="sign_in">Войти</string>
     <string name="wrong_data">Неверные данные</string>
     <string name="auth_hint">Введите ваше имя пользователя и пароль</string>
+    <string name="title_activity_maps1">Map</string>
 </resources>

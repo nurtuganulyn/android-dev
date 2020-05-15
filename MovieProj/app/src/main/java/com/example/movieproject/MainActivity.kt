@@ -67,6 +67,7 @@ class MainActivity : AppCompatActivity() {
                     ibSearch.visibility = View.INVISIBLE
                     return@OnNavigationItemSelectedListener true
                 }
+               
             }
                 return@OnNavigationItemSelectedListener false
             }
